@@ -15,6 +15,7 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 @RepositoryRestResource
 public interface ArticleRepository extends
         JpaRepository<Article, Long>,
+        ArticleRepositoryCustom,
         QuerydslPredicateExecutor<Article>,
         QuerydslBinderCustomizer<QArticle> {
 
@@ -23,7 +24,6 @@ public interface ArticleRepository extends
     Page<Article> findByUserAccount_UserIdContaining(String content, Pageable pageable);
     Page<Article> findByUserAccount_NicknameContaining(String nickname, Pageable pageable);
     Page<Article> findByHashtag(String hashtag, Pageable pageable);
-
 
     @Override
     default void customize(QuerydslBindings bindings, QArticle root) {

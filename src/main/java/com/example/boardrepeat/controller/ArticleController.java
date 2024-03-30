@@ -1,6 +1,7 @@
 package com.example.boardrepeat.controller;
 
 import com.example.boardrepeat.domain.type.SearchType;
+import com.example.boardrepeat.dto.ArticleDto;
 import com.example.boardrepeat.dto.response.ArticleResponse;
 import com.example.boardrepeat.dto.response.ArticleWithCommentsResponse;
 import com.example.boardrepeat.service.ArticleService;
@@ -60,4 +61,21 @@ public class ArticleController {
         return "articles/detail";
     }
 
+    @GetMapping("/search-hashtag")
+    public String searchHashtag(
+            @RequestParam(required = false) String searchValue,
+            @PageableDefault(size = 10, sort = "createdAt", direction = Sort.Direction.DESC) Pageable pageable,
+            ModelMap map
+    ) {
+        Page<ArticleResponse> articles = articleService.searchArticlesViaHashtag(searchValue, pageable).map(ArticleResponse::from);
+        List<Integer> paginationBarNumbers = paginationService.getPaginationBarNumbers(pageable.getPageNumber(), articles.getTotalPages());
+        List<String> hashtags = articleService.getHashtags();
+
+        map.addAttribute("articles", articles);
+        map.addAttribute("hashtags", hashtags);
+        map.addAttribute("paginationBarNumbers", paginationBarNumbers);
+        map.addAttribute("searchType", SearchType.HASHTAG);
+
+        return "articles/search-hashtag";
+    }
 }
