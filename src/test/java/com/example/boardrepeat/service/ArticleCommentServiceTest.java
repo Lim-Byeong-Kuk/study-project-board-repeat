@@ -7,7 +7,6 @@ import com.example.boardrepeat.dto.ArticleCommentDto;
 import com.example.boardrepeat.dto.UserAccountDto;
 import com.example.boardrepeat.repository.ArticleCommentRepository;
 import com.example.boardrepeat.repository.ArticleRepository;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -23,7 +22,6 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@Disabled("구현중")
 @DisplayName("비지니스 로직 - 댓글")
 @ExtendWith(MockitoExtension.class)
 public class ArticleCommentServiceTest {
@@ -35,8 +33,7 @@ public class ArticleCommentServiceTest {
     @Mock
     private ArticleCommentRepository articleCommentRepository;
 
-    @Disabled("구현중")
-    @DisplayName("[이해완료] 게시글 ID로 조회하면, 해당하는 댓글 리스트를 반환한다.")
+    @DisplayName("게시글 ID로 조회하면, 해당하는 댓글 리스트를 반환한다.")
     @Test
     void givenArticleId_whenSearchingComments_thenReturnsArticleComments() {
         // given
@@ -55,7 +52,6 @@ public class ArticleCommentServiceTest {
         BDDMockito.then(articleCommentRepository).should().findByArticle_Id(articleId);
     }
 
-    @Disabled("구현중")
     @DisplayName("댓글 정보를 입력하면, 댓글을 저장한다.")
     @Test
     void givenArticleCommentInfo_whenSavingArticleComment_thenSavesArticleComment() {
@@ -72,7 +68,6 @@ public class ArticleCommentServiceTest {
         BDDMockito.then(articleCommentRepository).should().save(ArgumentMatchers.any(ArticleComment.class));
     }
 
-    @Disabled("구현중")
     @DisplayName("댓글 저장을 시도했는데 맞는 게시글이 없으면, 경고 로그를 찍고 아무것도 안 한다.")
     @Test
     void givenNonexistenArticle_whenSavingArticleComment_thenLogsSituationAndDoesNothing() {
@@ -88,7 +83,6 @@ public class ArticleCommentServiceTest {
         BDDMockito.then(articleCommentRepository).shouldHaveNoInteractions();
     }
 
-    @Disabled("구현중")
     @DisplayName("댓글 정보를 입력하면, 댓글을 수정한다.")
     @Test
     void givenArticleCommentInfo_whenUpdatingArticleComment_thenUpdatesArticleComment() {
@@ -109,7 +103,6 @@ public class ArticleCommentServiceTest {
         BDDMockito.then(articleCommentRepository).should().getReferenceById(dto.id());
     }
 
-    @Disabled("구현중")
     @DisplayName("없는 댓글 정보를 수정하려고 하면, 경고 로그를 찍고 아무 것도 안 한다.")
     @Test
     void givenNoexistenArticleComment_whenUpdatingArticleComment_thenLogsWarningAndDoesNothing() {
@@ -124,7 +117,6 @@ public class ArticleCommentServiceTest {
         BDDMockito.then(articleCommentRepository).should().getReferenceById(dto.id());
     }
 
-    @Disabled("구현중")
     @DisplayName("댓글 ID를 입력하면, 댓글을 삭제한다.")
     @Test
     void givenArticleCommentId_whenDeletingArticleComment_thenDeletesArticleComment() {
